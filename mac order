@@ -1,0 +1,59 @@
+苹果Mac OS X操作系统下，隐藏文件是否显示有很多种设置方法，最简单的要算在Mac终端输入命令。显示/隐藏Mac隐藏文件命令如下(注意其中的空格并且区分大小写)：
+显示Mac隐藏文件的命令：defaults write com.apple.finder AppleShowAllFiles -bool true
+隐藏Mac隐藏文件的命令：defaults write com.apple.finder AppleShowAllFiles -bool false
+
+或者
+显示Mac隐藏文件的命令：defaults write com.apple.finder AppleShowAllFiles  YES
+隐藏Mac隐藏文件的命令：defaults write com.apple.finder AppleShowAllFiles  NO
+
+输完单击Enter键，退出终端，重新启动Finder就可以了
+
+重启Finder：鼠标单击窗口左上角的苹果标志-->强制退出-->Finder-->重新启动
+
+
+终端下编译OpenGL程序时，使用：
+cc -framework GLUT -framework OpenGL -framework Cocoa hellogl.c -o 文件名（不加后缀即可）
+编译出的结果使用./文件名 执行
+
+复制选取快速查看中的文本
+打开：defaults write com.apple.finder QLEnableTextSelection -bool TRUE;killall Finder
+关闭：defaults delete com.apple.finder QLEnableTextSelection;killall Finder
+
+保持开机，下载时候用很方便：
+进入终端，pmset noidle
+关闭终端则取消该功能
+
+Finder中开启资源库
+chflags nohidden ~/Library/
+关闭
+chflags hidden ~/Library/
+
+开启键盘连击，按住一个键可以不停输入
+开启：defaults write -g ApplePressAndHoldEnabled -bool FALSE
+关闭：defaults delete -g ApplePressAndHoldEnabled
+
+隐藏文件
+隐藏：chflags hidden 文件名
+显示：chflags nohidden 文件名
+
+文件路径显示
+开启 ：defaults write com.apple.finder _FXShowPosixPathInTitle -bool TRUE; killall Finder
+关闭：defaults delete com.apple.finder _FXShowPosixPathInTitle; killall Finder
+
+帮助显示隐藏程序
+开启：defaults write com.apple.Dock showhidden -bool TRUE;killall Dock
+关闭：defaults delete com.apple.Dock showhidden;killall Dock
+
+禁用dashboard
+关闭：defaults write com.apple.dashboard mcx-disabled -bool TRUE;killall Dock
+开启：defaults delete com.apple.dashboard mcx-disabled;killall Dock
+
+优化滚动效果
+开启：defaults write com.apple.finder NSDraggingAutoscrollDelay -int 0;killall Finder
+关闭：defaults delete com.apple.finder NSDraggingAutoscrollDelay;killall Finder
+
+1) Disable the rootless feature
+To disable the rootless feature at boot, run this command:
+sudo nvram boot-args="rootless=0 kext-dev-mode=1"
+Reboot, and then run:
+sudo ln -s /Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin /usr/texbin

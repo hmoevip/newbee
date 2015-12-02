@@ -1,0 +1,40 @@
+opencv 的安装与配置
+
+命令行下：
+一，安装Homebrew
+该步骤好麻烦
+本来，输入以下命令就OK的：
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+但是，权限问题是个坑。
+第一， /usr/local文件夹的属性，最后一个everyone一定要写成只读，否则报错，提示不安全。
+第二， /usr/local/Library文件夹和其下的文件夹的属性全部改为可读和可写。
+第三， /usr/local/share/doc/homebrew文件夹的属性要改成全部可读和可写。
+到这里，这个玩意儿，就可以成功安装了
+
+二，brew命令
+第一个 brew update; 正常都会顺利执行
+第二个 brew upgrade; 正常执行
+
+三，安装cmake
+又是权限的问题
+第一，/Library/Caches/Homebrew/Formula文件夹的属性改为前两个读写，最后一个只读。
+第二，/usr/local/opt文件夹的属性改为全部读写。
+最后，brew install cmake
+
+四，安装opencv
+这次很顺利了。
+第一，解压opencv的zip文件夹，然后进入该文件夹下，新建release文件夹，在release文件夹上右键进入命令行
+第二，输入cmake -G "Unix Makefiles" .. 一定要注意那两个.. 超级重要。
+第三，输入make
+第四，输入sudo make install
+安装结束。
+
+五，使用homebrew安装opencv
+首先，输入brew tap homebrew/science
+然后，输入brew install opencv —with-qt这里也可以不要后面的选项
+
+六，编译执行
+整了一天，首先opencv的安装，如果用第四种，需要修改为cmake —stdlib=libstdc++ G "Unix Makefiles" ..
+最好用第五种，简单。
+然后，在*.pro文件中加入QMAKE_LFLAGS += `pkg-config opencv --cflags --libs`
+就这一句话啊，整了一天啊～～

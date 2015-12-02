@@ -1,0 +1,28 @@
+第一步，安装c语音环境
+不想直接安装xcode，所以用下面的方法，有命令行就够我玩儿了。
+xcode-select --install
+
+第二步，安装QT环境
+下载QT安装包，分两种，一种debug版，一种release版，release版必须安装，编译用，debug版可有可无，release已经可以报错的位置，不需要debug也可以。
+安装release版，全自动，不用管。
+至于QTCreater，咱不需要了，有MacVim就够了。
+
+第三步，配置QT编译环境
+1.在/usr/local/Qt4.7/mkspecs/macx-g++下，打开qmake.conf文件，输入CONFIG+=debug_and_release 这一句就实现了，编译出来的结果放到release和debug下，不然太乱了。
+2.在环境变量中添加export QMAKESPEC=/usr/local/Qt4.7/mkspecs/macx-g++方法使用mac环境变量的三种方法。
+具体方法：
+1.touch ~/.bash_profile;
+2.open -t ~/.bash_profile
+3.输入export QMAKESPEC=/usr/local/Qt4.7/mkspecs/macx-g++
+4.source ~/.bash_profile
+
+第四步，其实已经配置好了，可以直接编译了
+直接文件夹上右键命令行，输入qmake ＊.pro 文件，然后make就ok了！
+
+第五步，配置OpenGL环境
+首先，Mac OS X已经有所有的OpenGL库了，不用折腾了。只需要完成下面两个步骤：
+1.如果不折腾，执行这一条命令就够了：g++ -framework OpenGL -framework GLUT -framework Foundation -o test my.cpp
+2.在＊.pro文件中添加
+QT += opengl
+LIBS+= -framework GLUT
+3.glut的头文件要改成#include <GLUT/glut.h>
